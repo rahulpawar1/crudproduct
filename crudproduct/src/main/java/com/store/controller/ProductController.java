@@ -14,6 +14,7 @@ import com.store.service.ProductService;
 public class ProductController {
 	
 	//controller talk to the service layer so we need to inject here
+	//this is controller
 	@Autowired
 	ProductService productService;
 	
