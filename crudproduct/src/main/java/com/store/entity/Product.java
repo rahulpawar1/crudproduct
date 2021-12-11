@@ -20,8 +20,13 @@ public class Product {
 	@Id
 	@GeneratedValue //this id we need auto generated so we use @GeneratedValue annotation.
 	private int id;
+	@SuppressWarnings("unused")
 	private String name;
+	
+	@SuppressWarnings("unused")
 	private int quantity;
+	
+	@SuppressWarnings("unused")
 	private double price;
 	
 }
