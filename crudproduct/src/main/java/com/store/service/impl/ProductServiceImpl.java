@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.store.entity.Product;
 import com.store.repository.ProductRepository;
+import com.store.service.ProductService;
 
 @Service
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService {
 	// productService talk to the productRepository
 		@Autowired
 		ProductRepository repository;
@@ -51,9 +52,16 @@ public class ProductServiceImpl {
 				return "product removed"+id;
 			}
 			
-		//list of products
-			public List<Product> findAll(){
+			//list of products
+			@Override
+			public List<Product> allProduct() {
 				return repository.findAll();
+			}
+
+			@Override
+			public Product update(int id) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 			
 		//update product

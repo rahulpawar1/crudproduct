@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.entity.Product;
 import com.store.service.ProductService;
 
-@RestController("api/product")
+@RestController
+@RequestMapping("/api/product/")
 public class ProductController {
 	
 	//controller talk to the service layer so we need to inject here
@@ -26,13 +28,13 @@ public class ProductController {
 	@PostMapping("/add")
 	public ResponseEntity<Product> addProduct (@RequestBody Product product) {
 		Product saveProduct = productService.saveProduct(product);
-		return new ResponseEntity<>(saveProduct, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(saveProduct, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/add-products")
 	public ResponseEntity<List<Product>> addProducts(@RequestBody List<Product> products){
 		List<Product> saveProducts = productService.saveProducts(products);
-		return new ResponseEntity<>(saveProducts, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(saveProducts, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/list")
