@@ -1,14 +1,16 @@
 package com.store.model;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import javax.validation.constraints.NotBlank;
 
 public class CreateProductRequest {
 
 	private int id;	
 	
 	@NotBlank
+	@Size(min=2)
 	private String name;
 	
 	@NotNull

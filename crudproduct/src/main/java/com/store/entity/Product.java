@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 //model class
 
@@ -18,6 +21,9 @@ public class Product {
 	private int quantity;
 	private double price;
 	
+	@Transient
+	private Boolean isPresent;
+	
 	//default constructor
 	public Product() {
 		
@@ -29,6 +35,7 @@ public class Product {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -53,6 +60,12 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
+
+	public Boolean getIsPresent() {
+		return isPresent;
+	}
+
+	public void setIsPresent(Boolean isPresent) {
+		this.isPresent = isPresent;
+	}	
 }
