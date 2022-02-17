@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.store.entity.Product;
+import com.store.model.CreateProductRequest;
 import com.store.repository.ProductRepository;
 import com.store.service.ProductService;
 
@@ -16,9 +17,17 @@ public class ProductServiceImpl implements ProductService {
 		ProductRepository repository;
 
 		// save single product
-		public Product saveProduct(Product product) { // this method accept the Product object and which save into database
-														// through repository
-			return repository.save(product);
+		public Product saveProduct(CreateProductRequest productRequest) { // this method accept the Product object and which save into database
+			// through repository
+			//create the object of entity class and set the values from CreateProductRequest into entity class Product
+			Product product = new Product();
+			product.setId(productRequest.getId());
+			product.setName(productRequest.getName());
+			product.setPrice(productRequest.getPrice());
+			product.setQuantity(productRequest.getQuantity());
+			
+			Product saved = (Product)repository.save(product);
+			return saved;
 		}
 
 		// save multiple products
@@ -63,6 +72,8 @@ public class ProductServiceImpl implements ProductService {
 				// TODO Auto-generated method stub
 				return null;
 			}
+
+
 			
 		//update product
 			
