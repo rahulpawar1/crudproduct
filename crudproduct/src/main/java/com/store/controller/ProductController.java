@@ -2,6 +2,10 @@ package com.store.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.entity.Product;
+import com.store.model.CreateProductRequest;
 import com.store.service.ProductService;
 
 @RestController
@@ -25,10 +30,22 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	static final Logger LOG = LoggerFactory.getLogger(ProductController.class); 
+	
 	@PostMapping("/add")
-	public ResponseEntity<Product> addProduct (@RequestBody Product product) {
-		Product saveProduct = productService.saveProduct(product);
-		return new ResponseEntity<>(saveProduct, HttpStatus.CREATED);
+	public ResponseEntity<Product> addProduct(@RequestBody @Valid CreateProductRequest productRequest)
+			throws Exception {
+
+		try {
+			LOG.info("Adding new product using CreateProductRequest: {}", productRequest.toString());
+			//check product ready exist or not
+			
+			//save product call
+			Product saveProduct = productService.saveProduct(productRequest);
+			return new ResponseEntity<>(saveProduct, HttpStatus.CREATED);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 	
 	@PostMapping("/add-products")
